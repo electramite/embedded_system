@@ -1091,10 +1091,6 @@ __DELAY_USW_LOOP:
 	ADD  R31,R0
 	.ENDM
 
-;NAME DEFINITIONS FOR GLOBAL VARIABLES ALLOCATED TO REGISTERS
-	.DEF _count=R4
-	.DEF _count_msb=R5
-
 	.CSEG
 	.ORG 0x00
 
@@ -1124,23 +1120,13 @@ __START_OF_CODE:
 	JMP  0x00
 	JMP  0x00
 
-;GLOBAL REGISTER VARIABLES INITIALIZATION
-__REG_VARS:
-	.DB  0x0,0x0
-
-_0x3:
-	.DB  0x3F,0x0,0x30,0x0,0x5B,0x0,0x4F,0x0
-	.DB  0x66,0x0,0x6D,0x0,0x7D,0x0,0x7,0x0
-	.DB  0x7F,0x0,0x67
+_0x0:
+	.DB  0x6C,0x61,0x77,0x64,0x69,0x0
 
 __GLOBAL_INI_TBL:
-	.DW  0x02
-	.DW  0x04
-	.DW  __REG_VARS*2
-
-	.DW  0x13
-	.DW  _num
-	.DW  _0x3*2
+	.DW  0x06
+	.DW  _0x10
+	.DW  _0x0*2
 
 _0xFFFFFFFF:
 	.DW  0
@@ -1232,146 +1218,236 @@ __GLOBAL_INI_END:
 	.SET power_ctrl_reg=mcucr
 	#endif
 ;#include <delay.h>
-;int count = 0;
-;int num[] = {0x3F, 0x30, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x67};
-
-	.DSEG
-;void main(){
-; 0000 0005 void main(){
+;#include <mylcd.h>
 
 	.CSEG
+_lcd_s:
+; .FSTART _lcd_s
+	ST   -Y,R17
+	ST   -Y,R16
+	MOVW R16,R26
+;	*p -> R16,R17
+_0x3:
+	MOVW R26,R16
+	LD   R30,X
+	CPI  R30,0
+	BREQ _0x5
+	LD   R26,X
+	RCALL _lcd_char
+	__ADDWRN 16,17,1
+	RJMP _0x3
+_0x5:
+	LD   R16,Y+
+	LD   R17,Y+
+	RET
+; .FEND
+_lcd_init:
+; .FSTART _lcd_init
+	LDI  R30,LOW(255)
+	OUT  0x17,R30
+	CBI  0x18,2
+	CBI  0x18,0
+	LDI  R26,LOW(50)
+	LDI  R27,0
+	RCALL _delay_ms
+	LDI  R26,LOW(32)
+	RCALL _lcd_cmd
+	RCALL _latch
+	LDI  R26,LOW(40)
+	RCALL _lcd_cmd
+	RCALL _latch
+	LDI  R26,LOW(6)
+	RCALL _lcd_cmd
+	RCALL _latch
+	LDI  R26,LOW(12)
+	RCALL _lcd_cmd
+	LDI  R26,LOW(50)
+	LDI  R27,0
+	RCALL _delay_ms
+	RCALL SUBOPT_0x0
+	LDI  R26,LOW(0)
+	LDI  R27,0
+	RCALL _lcd_xy
+	RET
+; .FEND
+;	num -> R20,R21
+;	H -> R17
+;	T -> R16
+;	O -> R19
+;	num -> R20,R21
+;	d0 -> R17
+;	d1 -> R16
+;	d2 -> R19
+;	d3 -> R18
+;	num -> Y+6
+;	d0 -> R17
+;	d1 -> R16
+;	d2 -> R19
+;	d3 -> R18
+;	num1 -> R20,R21
+_lcd_xy:
+; .FSTART _lcd_xy
+	RCALL __SAVELOCR4
+	MOVW R16,R26
+	__GETWRS 18,19,4
+;	a -> R18,R19
+;	b -> R16,R17
+	MOV  R0,R18
+	OR   R0,R19
+	BRNE _0xA
+	SUBI R26,-LOW(128)
+	RCALL _lcd_cmd
+_0xA:
+	LDI  R30,LOW(1)
+	LDI  R31,HIGH(1)
+	CP   R30,R18
+	CPC  R31,R19
+	BRNE _0xB
+	MOV  R26,R16
+	SUBI R26,-LOW(192)
+	RCALL _lcd_cmd
+_0xB:
+	RCALL __LOADLOCR4
+	ADIW R28,6
+	RET
+; .FEND
+_latch:
+; .FSTART _latch
+	CBI  0x18,2
+	LDI  R26,LOW(20)
+	LDI  R27,0
+	RCALL _delay_ms
+	SBI  0x18,2
+	LDI  R26,LOW(20)
+	LDI  R27,0
+	RCALL _delay_ms
+	CBI  0x18,2
+	RET
+; .FEND
+_lcd_cmd:
+; .FSTART _lcd_cmd
+	ST   -Y,R17
+	MOV  R17,R26
+;	cmd -> R17
+	IN   R30,0x18
+	ANDI R30,LOW(0xF8)
+	OUT  0x18,R30
+	MOV  R30,R17
+	ANDI R30,LOW(0xF0)
+	RCALL SUBOPT_0x1
+	RJMP _0x2000001
+; .FEND
+_lcd_char:
+; .FSTART _lcd_char
+	ST   -Y,R17
+	MOV  R17,R26
+;	single -> R17
+	IN   R30,0x18
+	ANDI R30,LOW(0xF9)
+	OUT  0x18,R30
+	SBI  0x18,0
+	MOV  R30,R17
+	ANDI R30,LOW(0xF0)
+	ORI  R30,1
+	RCALL SUBOPT_0x1
+	ORI  R30,1
+_0x2000001:
+	OUT  0x18,R30
+	RCALL _latch
+	LD   R17,Y+
+	RET
+; .FEND
+;
+;void main(){
+; 0000 0005 void main(){
 _main:
 ; .FSTART _main
-; 0000 0006 PORTC = 0b00000000;
-	LDI  R30,LOW(0)
-	OUT  0x15,R30
-; 0000 0007 DDRC = 0b01000001; // POWER_LED- 0, COUNTER_LED- 1
-	LDI  R30,LOW(65)
-	OUT  0x14,R30
-; 0000 0008 
-; 0000 0009 PORTA = 0b10100000;
-	LDI  R30,LOW(160)
-	OUT  0x1B,R30
-; 0000 000A DDRA = 0b00001001; // START_BUTTON - 0, COUNTER_BUTTON - 2
-	LDI  R30,LOW(9)
-	OUT  0x1A,R30
-; 0000 000B 
-; 0000 000C PORTD = 0b00000000;
-	LDI  R30,LOW(0)
+; 0000 0006 PORTD = 0b00000001;
+	LDI  R30,LOW(1)
 	OUT  0x12,R30
-; 0000 000D DDRD = 0b11111111;
-	LDI  R30,LOW(255)
+; 0000 0007 DDRD = 0b00000000;
+	LDI  R30,LOW(0)
 	OUT  0x11,R30
-; 0000 000E 
-; 0000 000F PORTA.0 = 1;
-	SBI  0x1B,0
-; 0000 0010 PORTD = num[0];
-	LDS  R30,_num
-	OUT  0x12,R30
-; 0000 0011 while(1){
-_0x6:
-; 0000 0012     if(PINA.7 == 0){
-	SBIC 0x19,7
-	RJMP _0x9
-; 0000 0013         count = count + 1;
-	MOVW R30,R4
-	ADIW R30,1
-	MOVW R4,R30
-; 0000 0014 
-; 0000 0015         if(count > 9){
-	LDI  R30,LOW(9)
-	LDI  R31,HIGH(9)
-	CP   R30,R4
-	CPC  R31,R5
-	BRGE _0xA
-; 0000 0016             count = 0;
-	CLR  R4
-	CLR  R5
-; 0000 0017         }
-; 0000 0018         PORTD = num[count];
-_0xA:
-	RCALL SUBOPT_0x0
-; 0000 0019         delay_ms(400);
-	LDI  R26,LOW(400)
-	LDI  R27,HIGH(400)
-	RCALL _delay_ms
-; 0000 001A     }
-; 0000 001B     if(PINA.5 == 0){
-_0x9:
-	SBIC 0x19,5
-	RJMP _0xB
-; 0000 001C         delay_ms(400);
-	LDI  R26,LOW(400)
-	LDI  R27,HIGH(400)
-	RCALL _delay_ms
-; 0000 001D         while(count > 0){
+; 0000 0008 lcd_init();
+	RCALL _lcd_init
+; 0000 0009 while(1){
 _0xC:
-	CLR  R0
-	CP   R0,R4
-	CPC  R0,R5
-	BRGE _0xE
-; 0000 001E             PORTA.3 = 1;
-	SBI  0x1B,3
-; 0000 001F             PORTC.6 = 1;
-	SBI  0x15,6
-; 0000 0020             PORTD = num[count];
+; 0000 000A 
+; 0000 000B     if(PIND.0 == 0)
+	SBIC 0x10,0
+	RJMP _0xF
+; 0000 000C     {   lcd_xy(0, 4);
 	RCALL SUBOPT_0x0
-; 0000 0021             delay_ms(500);
-	LDI  R26,LOW(500)
-	LDI  R27,HIGH(500)
+	LDI  R26,LOW(4)
+	LDI  R27,0
+	RCALL _lcd_xy
+; 0000 000D         lcd_s("lawdi");
+	__POINTW2MN _0x10,0
+	RCALL _lcd_s
+; 0000 000E         delay_ms(5000);
+	LDI  R26,LOW(5000)
+	LDI  R27,HIGH(5000)
 	RCALL _delay_ms
-; 0000 0022             PORTA.3 = 0;
-	CBI  0x1B,3
-; 0000 0023 
-; 0000 0024             delay_ms(500);
-	LDI  R26,LOW(500)
-	LDI  R27,HIGH(500)
-	RCALL _delay_ms
-; 0000 0025             count = count - 1;
-	MOVW R30,R4
-	SBIW R30,1
-	MOVW R4,R30
-; 0000 0026         }
+; 0000 000F         lcd_cmd(0x01);
+	LDI  R26,LOW(1)
+	RCALL _lcd_cmd
+; 0000 0010     }
+; 0000 0011 
+; 0000 0012 
+; 0000 0013 
+; 0000 0014 }
+_0xF:
 	RJMP _0xC
-_0xE:
-; 0000 0027         PORTC.6 = 0;
-	CBI  0x15,6
-; 0000 0028         PORTD = num[0];
-	LDS  R30,_num
-	OUT  0x12,R30
-; 0000 0029 
-; 0000 002A     }
-; 0000 002B 
-; 0000 002C 
-; 0000 002D     }
-_0xB:
-	RJMP _0x6
-; 0000 002E }
-_0x17:
-	RJMP _0x17
+; 0000 0015 }
+_0x11:
+	RJMP _0x11
 ; .FEND
 
 	.DSEG
-_num:
-	.BYTE 0x14
+_0x10:
+	.BYTE 0x6
 
 	.CSEG
-;OPTIMIZER ADDED SUBROUTINE, CALLED 2 TIMES, CODE SIZE REDUCTION:6 WORDS
+;OPTIMIZER ADDED SUBROUTINE, CALLED 2 TIMES, CODE SIZE REDUCTION:1 WORDS
 SUBOPT_0x0:
-	MOVW R30,R4
-	LDI  R26,LOW(_num)
-	LDI  R27,HIGH(_num)
-	LSL  R30
-	ROL  R31
-	ADD  R26,R30
-	ADC  R27,R31
-	LD   R30,X
-	OUT  0x12,R30
+	LDI  R30,LOW(0)
+	LDI  R31,HIGH(0)
+	ST   -Y,R31
+	ST   -Y,R30
+	RET
+
+;OPTIMIZER ADDED SUBROUTINE, CALLED 2 TIMES, CODE SIZE REDUCTION:4 WORDS
+SUBOPT_0x1:
+	OUT  0x18,R30
+	RCALL _latch
+	MOV  R30,R17
+	ANDI R30,LOW(0xF)
+	LDI  R26,LOW(16)
+	MULS R30,R26
+	MOVW R30,R0
 	RET
 
 ;RUNTIME LIBRARY
 
 	.CSEG
+__SAVELOCR4:
+	ST   -Y,R19
+__SAVELOCR3:
+	ST   -Y,R18
+__SAVELOCR2:
+	ST   -Y,R17
+	ST   -Y,R16
+	RET
+
+__LOADLOCR4:
+	LDD  R19,Y+3
+__LOADLOCR3:
+	LDD  R18,Y+2
+__LOADLOCR2:
+	LDD  R17,Y+1
+	LD   R16,Y
+	RET
+
 _delay_ms:
 	adiw r26,0
 	breq __delay_ms1

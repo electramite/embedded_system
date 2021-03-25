@@ -1,0 +1,4 @@
+main DSTACK_USAGE:0 DSTACK_LEVEL:0 FILE:"lcd.c" LINE:5
+lcd_init DSTACK_USAGE:0 DSTACK_LEVEL:0 FILE:"C:\cvavreval\inc\mylcd.h" LINE:24
+lcd_xy DSTACK_USAGE:8 DSTACK_LEVEL:8 FILE:"C:\cvavreval\inc\mylcd.h" LINE:86
+lcd_cmd DSTACK_USAGE:2 DSTACK_LEVEL:10 FILE:"C:\cvavreval\inc\mylcd.h" LINE:103

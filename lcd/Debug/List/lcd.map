@@ -1,7 +1,6 @@
 RAM Allocation [bytes]
 Variable                                                                          Address   Size
 ------------------------------------------------------------------------------------------------
-num                                                                               0x0160      20
 
 EEPROM Allocation [bytes]
 Variable                                                                          Address   Size
@@ -10,9 +9,14 @@ Variable                                                                        
 Register Allocation
 Variable                                                                          Register  Size
 ------------------------------------------------------------------------------------------------
-count                                                                             R4,R5        2
 
 FLASH Allocation [words]
 Function                                                                          Address   Size
 ------------------------------------------------------------------------------------------------
-main                                                                              0x00069     61
+lcd_s                                                                             0x0005E     15
+lcd_init                                                                          0x0006D     26
+lcd_xy                                                                            0x00087     20
+latch                                                                             0x0009B     10
+lcd_cmd                                                                           0x000A5      9
+lcd_char                                                                          0x000AE     15
+main                                                                              0x000BD     21

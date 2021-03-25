@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>7.0</ProjectVersion>
     <ToolchainName>com.HPInfoTech.CodeVisionAVR.C</ToolchainName>
-    <ProjectGuid>{821EBAD6-423D-497C-A76A-A46C3F34E8A0}</ProjectGuid>
+    <ProjectGuid>{33E8C815-423D-497C-A76A-A46C3F34E8A0}</ProjectGuid>
     <avrdevice>ATmega16</avrdevice>
     <avrdeviceseries>none</avrdeviceseries>
     <OutputType>Executable</OutputType>
@@ -12,9 +12,9 @@
     <OutputFileName>$(MSBuildProjectName)</OutputFileName>
     <OutputFileExtension>.cof</OutputFileExtension>
     <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
-    <AssemblyName>washing_machine</AssemblyName>
-    <Name>washing_machine</Name>
-    <RootNamespace>washing_machine</RootNamespace>
+    <AssemblyName>lcd</AssemblyName>
+    <Name>lcd</Name>
+    <RootNamespace>lcd</RootNamespace>
     <ToolchainFlavour>Native</ToolchainFlavour>
     <KeepTimersRunning>true</KeepTimersRunning>
     <OverrideVtor>false</OverrideVtor>
@@ -24,21 +24,21 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <ToolchainSettings>
       <CV>
-        <CVProjectPath>"washing_machine.prj"</CVProjectPath>
+        <CVProjectPath>"lcd.prj"</CVProjectPath>
       </CV>
     </ToolchainSettings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <ToolchainSettings>
       <CV>
-        <CVProjectPath>"washing_machine.prj"</CVProjectPath>
+        <CVProjectPath>"lcd.prj"</CVProjectPath>
       </CV>
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="washing_machine.c">
+    <Compile Include="lcd.c">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>
