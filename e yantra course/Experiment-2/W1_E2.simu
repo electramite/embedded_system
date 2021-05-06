@@ -1,0 +1,105 @@
+<circuit type="simulide_0.4" reactStep="50" Speed_sps="1000000" animate="0" Simu_Step_nS="1000" Speed_per="100" noLinAcc="5">
+
+Unique  Id: TextComponent-1945: 
+Circuit Id: TextComponent-1945
+<item id="TextComponent-1945" Border="1" hflip="1" circRot="6.9533395809200054e-310" circPos="0,0" valLabely="0" Show_id="false" Margin="5" labelrot="0" labely="-24" x="364" valLabelx="0" Text="Bargraph LED" y="-304" itemtype="TextComponent" vflip="1" boardRot="-1000000" valLabRot="0" Font_Size="10" objectName="TextComponent-1945" Opacity="1" boardPos="-1e+06,-1e+06" rotation="0" mainComp="false" Font="Helvetica [Cronyx]" Fixed_Width="false" labelx="-16"/>
+
+Unique  Id: Tunnel-1709: 
+Circuit Id: Tunnel-1700
+<item id="Tunnel-1700" hflip="1" circRot="6.9525874344611967e-310" circPos="0,0" Uid="" valLabely="0" Show_id="false" Rotated="false" labelrot="0" labely="-24" x="336" valLabelx="0" y="-364" itemtype="Tunnel" vflip="1" boardRot="-1000000" valLabRot="0" objectName="Tunnel-1709" boardPos="-1e+06,-1e+06" rotation="0" mainComp="false" labelx="-16" Name="bar_graph_led_8"/>
+
+Unique  Id: Tunnel-1708: 
+Circuit Id: Tunnel-1700
+<item id="Tunnel-1700" hflip="1" circRot="6.9525874344611967e-310" circPos="0,0" Uid="" valLabely="0" Show_id="false" Rotated="false" labelrot="0" labely="-24" x="336" valLabelx="0" y="-324" itemtype="Tunnel" vflip="1" boardRot="-1000000" valLabRot="0" objectName="Tunnel-1708" boardPos="-1e+06,-1e+06" rotation="0" mainComp="false" labelx="-16" Name="bar_graph_led_6"/>
+
+Unique  Id: Tunnel-1707: 
+Circuit Id: Tunnel-1700
+<item id="Tunnel-1700" hflip="1" circRot="6.9525874344611967e-310" circPos="0,0" Uid="" valLabely="0" Show_id="false" Rotated="false" labelrot="0" labely="-24" x="336" valLabelx="0" y="-344" itemtype="Tunnel" vflip="1" boardRot="-1000000" valLabRot="0" objectName="Tunnel-1707" boardPos="-1e+06,-1e+06" rotation="0" mainComp="false" labelx="-16" Name="bar_graph_led_2"/>
+
+Unique  Id: Tunnel-1705: 
+Circuit Id: Tunnel-1700
+<item id="Tunnel-1700" hflip="1" circRot="6.9525874344611967e-310" circPos="0,0" Uid="" valLabely="0" Show_id="false" Rotated="false" labelrot="0" labely="-24" x="48" valLabelx="0" y="-236" itemtype="Tunnel" vflip="1" boardRot="-1000000" valLabRot="0" objectName="Tunnel-1705" boardPos="-1e+06,-1e+06" rotation="0" mainComp="false" labelx="-16" Name="bar_graph_led_6"/>
+
+Unique  Id: Tunnel-1703: 
+Circuit Id: Tunnel-1700
+<item id="Tunnel-1700" hflip="1" circRot="6.9525874344611967e-310" circPos="0,0" Uid="" valLabely="0" Show_id="false" Rotated="false" labelrot="0" labely="-24" x="48" valLabelx="0" y="-276" itemtype="Tunnel" vflip="1" boardRot="-1000000" valLabRot="0" objectName="Tunnel-1703" boardPos="-1e+06,-1e+06" rotation="0" mainComp="false" labelx="-16" Name="bar_graph_led_8"/>
+
+Unique  Id: Tunnel-1700: 
+Circuit Id: Tunnel-1700
+<item id="Tunnel-1700" hflip="1" circRot="6.9525874344611967e-310" circPos="0,0" Uid="" valLabely="0" Show_id="false" Rotated="false" labelrot="0" labely="-24" x="48" valLabelx="0" y="-256" itemtype="Tunnel" vflip="1" boardRot="-1000000" valLabRot="0" objectName="Tunnel-1700" boardPos="-1e+06,-1e+06" rotation="0" mainComp="false" labelx="-16" Name="bar_graph_led_2"/>
+
+Unique  Id: LedBar-1699: 
+Circuit Id: LedBar-1699
+<item id="LedBar-1699" hflip="1" circRot="6.9525874344611967e-310" circPos="0,0" Threshold="2.3999999999999999" valLabely="0" Show_id="false" Color="5" labelrot="0" labely="-44" x="416" valLabelx="0" MaxCurrent="0.029999999999999999" y="-332" itemtype="LedBar" vflip="1" boardRot="-1000000" valLabRot="0" objectName="LedBar-1699" boardPos="-1e+06,-1e+06" rotation="0" Size="3" mainComp="false" labelx="-16" Resistance="100" Grounded="true"/>
+
+Unique  Id: Uno-1228: 
+Circuit Id: Arduino Uno
+<item id="Arduino Uno" hflip="1" circRot="1.170226497628843e-316" circPos="0,0" Logic_Symbol="false" valLabely="111" Show_id="true" labelrot="0" labely="-20" BoardId="" x="92" valLabelx="77" y="-352" itemtype="Subcircuit" vflip="1" boardRot="-1000000" valLabRot="-90" objectName="Uno-1228" boardPos="-1e+06,-1e+06" rotation="0" mainComp="false" labelx="0">
+  <mainCompProps Init_gdb="false" Logic_Symbol="false" Auto_Load="false" Program="../../../../../../../../home/erts/Mooc_dev/Solution_folders/Week_1/2. Experiment/Experiment-2/Experiment-2/build/Experiment-2.hex" Mhz="16"/>
+ </item>
+
+Unique  Id: Tunnel-1574: 
+Circuit Id: Tunnel-1574
+<item id="Tunnel-1574" hflip="1" circRot="2.473976580422759e-91" circPos="0,0" Uid="" valLabely="0" Show_id="false" Rotated="false" labelrot="0" labely="-24" x="44" valLabelx="0" y="-320" itemtype="Tunnel" vflip="1" boardRot="-1000000" valLabRot="0" objectName="Tunnel-1574" boardPos="-1e+06,-1e+06" rotation="0" mainComp="false" labelx="-16" Name="interrupt_sw"/>
+
+Unique  Id: Tunnel-1577: 
+Circuit Id: Tunnel-1577
+<item id="Tunnel-1577" hflip="1" circRot="6.9529316750833315e-310" circPos="0,0" Uid="" valLabely="0" Show_id="false" Rotated="true" labelrot="0" labely="-24" x="284" valLabelx="0" y="-272" itemtype="Tunnel" vflip="1" boardRot="-1000000" valLabRot="0" objectName="Tunnel-1577" boardPos="-1e+06,-1e+06" rotation="0" mainComp="false" labelx="-16" Name="Gnd"/>
+
+Unique  Id: Push-1581: 
+Circuit Id: Push-1581
+<item id="Push-1581" hflip="1" Key="" circRot="6.9529316750833315e-310" circPos="0,0" valLabely="0" Norm_Close="false" Poles="1" Show_id="false" labelrot="0" labely="-24" x="368" valLabelx="0" y="-420" itemtype="Push" vflip="1" boardRot="-1000000" valLabRot="0" objectName="Push-1581" boardPos="-1e+06,-1e+06" rotation="0" mainComp="false" labelx="-16"/>
+
+Unique  Id: Tunnel-1582: 
+Circuit Id: Tunnel-1574
+<item id="Tunnel-1574" hflip="1" circRot="2.473976580422759e-91" circPos="0,0" Uid="" valLabely="0" Show_id="false" Rotated="false" labelrot="0" labely="-24" x="332" valLabelx="0" y="-420" itemtype="Tunnel" vflip="1" boardRot="-1000000" valLabRot="0" objectName="Tunnel-1582" boardPos="-1e+06,-1e+06" rotation="0" mainComp="false" labelx="-16" Name="interrupt_sw"/>
+
+Unique  Id: TextComponent-1586: 
+Circuit Id: TextComponent-1463
+<item id="TextComponent-1463" Border="1" hflip="1" circRot="6.9532253551213188e-310" circPos="0,0" valLabely="0" Show_id="false" Margin="2" labelrot="0" labely="-24" x="344" valLabelx="0" Text="Switch" y="-460" itemtype="TextComponent" vflip="1" boardRot="-1000000" valLabRot="0" Font_Size="10" objectName="TextComponent-1586" Opacity="1" boardPos="-1e+06,-1e+06" rotation="0" mainComp="false" Font="Helvetica [Cronyx]" Fixed_Width="false" labelx="-16"/>
+
+Unique  Id: Tunnel-1831: 
+Circuit Id: Tunnel-1577
+<item id="Tunnel-1577" hflip="1" circRot="6.9529316750833315e-310" circPos="0,0" Uid="" valLabely="0" Show_id="false" Rotated="true" labelrot="0" labely="-24" x="412" valLabelx="0" y="-420" itemtype="Tunnel" vflip="1" boardRot="-1000000" valLabRot="0" objectName="Tunnel-1831" boardPos="-1e+06,-1e+06" rotation="0" mainComp="false" labelx="-16" Name="Gnd"/>
+
+Unique  Id: Connector-1583: 
+Circuit Id: Connector-1583
+<item id="Connector-1583" hflip="1" startpinid="Tunnel-1582-pin" circRot="6.9529316753007204e-310" circPos="0,0" endpinid="Push-1581-pinP0" valLabely="0" Show_id="false" enodeid="Circ_eNode-1940" pointList="332,-420,352,-420" labelrot="0" labely="-24" x="332" valLabelx="0" y="-420" itemtype="Connector" vflip="1" boardRot="-1000000" valLabRot="0" objectName="Connector-1583" boardPos="-1e+06,-1e+06" rotation="0" mainComp="false" labelx="-16"/>
+
+Unique  Id: Connector-1702: 
+Circuit Id: Connector-1702
+<item id="Connector-1702" hflip="1" startpinid="Uno-1228-PB1" circRot="6.9525874346785856e-310" circPos="0,0" endpinid="Tunnel-1700-pin" valLabely="0" Show_id="false" enodeid="Circ_eNode-1941" pointList="100,-256,48,-256" labelrot="0" labely="-24" x="100" valLabelx="0" y="-256" itemtype="Connector" vflip="1" boardRot="-1000000" valLabRot="0" objectName="Connector-1702" boardPos="-1e+06,-1e+06" rotation="0" mainComp="false" labelx="-16"/>
+
+Unique  Id: Connector-1704: 
+Circuit Id: Connector-1704
+<item id="Connector-1704" hflip="1" startpinid="Uno-1228-PB0" circRot="6.9525874346785856e-310" circPos="0,0" endpinid="Tunnel-1703-pin" valLabely="0" Show_id="false" enodeid="Circ_eNode-1942" pointList="100,-264,48,-264,48,-276" labelrot="0" labely="-24" x="100" valLabelx="0" y="-264" itemtype="Connector" vflip="1" boardRot="-1000000" valLabRot="0" objectName="Connector-1704" boardPos="-1e+06,-1e+06" rotation="0" mainComp="false" labelx="-16"/>
+
+Unique  Id: Connector-1706: 
+Circuit Id: Connector-1706
+<item id="Connector-1706" hflip="1" startpinid="Uno-1228-PB5" circRot="6.9525874346785856e-310" circPos="0,0" endpinid="Tunnel-1705-pin" valLabely="0" Show_id="false" enodeid="Circ_eNode-1943" pointList="100,-224,48,-224,48,-236" labelrot="0" labely="-24" x="100" valLabelx="0" y="-224" itemtype="Connector" vflip="1" boardRot="-1000000" valLabRot="0" objectName="Connector-1706" boardPos="-1e+06,-1e+06" rotation="0" mainComp="false" labelx="-16"/>
+
+Unique  Id: Connector-1710: 
+Circuit Id: Connector-1710
+<item id="Connector-1710" hflip="1" startpinid="Tunnel-1709-pin" circRot="6.9525874346785856e-310" circPos="0,0" endpinid="LedBar-1699-led0-pinP" valLabely="0" Show_id="false" enodeid="Circ_eNode-1942" pointList="336,-364,400,-364,400,-356" labelrot="0" labely="-24" x="336" valLabelx="0" y="-364" itemtype="Connector" vflip="1" boardRot="-1000000" valLabRot="0" objectName="Connector-1710" boardPos="-1e+06,-1e+06" rotation="0" mainComp="false" labelx="-16"/>
+
+Unique  Id: Connector-1711: 
+Circuit Id: Connector-1711
+<item id="Connector-1711" hflip="1" startpinid="Tunnel-1707-pin" circRot="6.9525874346785856e-310" circPos="0,0" endpinid="LedBar-1699-led1-pinP" valLabely="0" Show_id="false" enodeid="Circ_eNode-1941" pointList="336,-344,400,-344,400,-348" labelrot="0" labely="-24" x="336" valLabelx="0" y="-344" itemtype="Connector" vflip="1" boardRot="-1000000" valLabRot="0" objectName="Connector-1711" boardPos="-1e+06,-1e+06" rotation="0" mainComp="false" labelx="-16"/>
+
+Unique  Id: Connector-1712: 
+Circuit Id: Connector-1712
+<item id="Connector-1712" hflip="1" startpinid="Tunnel-1708-pin" circRot="1.3351088249368486e-306" circPos="0,0" endpinid="LedBar-1699-led2-pinP" valLabely="0" Show_id="false" enodeid="Circ_eNode-1943" pointList="336,-324,400,-324,400,-340" labelrot="0" labely="-24" x="336" valLabelx="0" y="-324" itemtype="Connector" vflip="1" boardRot="-1000000" valLabRot="0" objectName="Connector-1712" boardPos="-1e+06,-1e+06" rotation="0" mainComp="false" labelx="-16"/>
+
+Unique  Id: Connector-1575: 
+Circuit Id: Connector-1575
+<item id="Connector-1575" hflip="1" startpinid="Uno-1228-PD2" circRot="6.9527029710974638e-310" circPos="0,0" endpinid="Tunnel-1574-pin" valLabely="0" Show_id="false" enodeid="Circ_eNode-1940" pointList="100,-320,44,-320" labelrot="0" labely="-24" x="100" valLabelx="0" y="-320" itemtype="Connector" vflip="1" boardRot="-1000000" valLabRot="0" objectName="Connector-1575" boardPos="-1e+06,-1e+06" rotation="0" mainComp="false" labelx="-16"/>
+
+Unique  Id: Connector-1578: 
+Circuit Id: Connector-1578
+<item id="Connector-1578" hflip="1" startpinid="Uno-1228-GND0" circRot="0" circPos="0,0" endpinid="Tunnel-1577-pin" valLabely="0" Show_id="false" enodeid="Circ_eNode-1944" pointList="244,-272,284,-272" labelrot="0" labely="-24" x="244" valLabelx="0" y="-272" itemtype="Connector" vflip="1" boardRot="-1000000" valLabRot="0" objectName="Connector-1578" boardPos="-1e+06,-1e+06" rotation="0" mainComp="false" labelx="-16"/>
+
+Unique  Id: Connector-1832: 
+Circuit Id: Connector-1832
+<item id="Connector-1832" hflip="1" startpinid="Push-1581-switch0pinN" circRot="6.9527029710199943e-310" circPos="0,0" endpinid="Tunnel-1831-pin" valLabely="0" Show_id="false" enodeid="Circ_eNode-1944" pointList="384,-420,412,-420" labelrot="0" labely="-24" x="384" valLabelx="0" y="-420" itemtype="Connector" vflip="1" boardRot="-1000000" valLabRot="0" objectName="Connector-1832" boardPos="-1e+06,-1e+06" rotation="0" mainComp="false" labelx="-16"/>
+ 
+</circuit>
