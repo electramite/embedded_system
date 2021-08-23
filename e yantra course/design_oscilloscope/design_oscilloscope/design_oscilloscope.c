@@ -1,40 +1,4 @@
-/*! \mainpage Week-4 Challenge Activity 2: Design Digital Oscilloscope
- *
- * @author     e-Yantra Team
- * @date       2021/06/07
- *
- * \subsection Aim
- * To display waveforms from function generator on GLCD with switches representing Digital Oscilloscope (DSO).
- *
- * \subsection Connections
- * Input channel from Function Generator:						<br>
- * 		Arduino Pin A0 	--> Atmega2560 PORTK Pin 0 (PK0)		<br>
- * 		Arduino Aref	--> 5 V									<br>
- * 
- * GLCD Connections:											<br>
- *		 GLCD Pins	  Arudino Pins		Atmega2560 Pins			<br>
- *			  D0  --> 22			-->	PA0						<br>
- *			  D1  --> 23			-->	PA1						<br>
- *			  D2  --> 24			-->	PA2						<br>
- *			  D3  --> 25			-->	PA3						<br>
- *			  D4  --> 26			-->	PA4						<br>
- *			  D5  --> 27			-->	PA5						<br>
- *			  D6  --> 28			-->	PA6						<br>
- *			  D7  --> 29			-->	PA7						<br>
- *			  RS  --> 37			--> PC0						<br>
- *			  RW  --> 36			--> PC1						<br>
- *			  EN  --> 35			--> PC2						<br>
- *			  RST --> 32			--> PC5						<br>
- *			  CS1 --> 34			-->	PC3						<br>
- *			  CS2 --> 33			-->	PC4						<br>
- *
- * Switch Connections:											<br>
- *		 Switch Pins   Arudino Pins		Atmega2560 Pins			<br>
- *			 DIV+  --> 20			-->	PD1						<br>
- *			 DIV-  --> 19			-->	PD2						<br>
- *			 HOLD  --> 18			-->	PD3						<br>
- *			 UP	   --> 2			-->	PE4						<br>
- *			 DOWN  --> 3			-->	PE5						<br>
+/*
  *
  * The DSO screen has total size of 128 x 64 pixels, which is divided into two sections:
  * 
@@ -77,7 +41,6 @@
 // If any
 
 //---------------------------------- GLOBAL VARIABLES ---------------------------------------------------
-// If any
 // array to store the data from the input waveform
 // since the waveform display area is of 96 columns or pixels, we store double amount of data in buffer
 // Note: the input waveform from the Function Generator has minimum value of 0 V
@@ -121,44 +84,23 @@ int vert_disp = 0;
 
 
 //---------------------------------- FUNCTIONS ----------------------------------------------------------
-// << TODO >> : Complete all the functions as per the instructions given in form of comments
-
-/**
- * @brief      Makes **ONLY** DIV+, DIV-, HOLD, UP, DOWN switch pins and dso_input_channel pin as input,
- * 				Activates pull-up for **ONLY** these switch pins and deactivates pull-up for **ONLY** dso_input_channel pin
- */
 void dso_switches_input_channel_config(void)
 {
-	// << NOTE >> : Use Masking and Shift Operators here
-	// << TODO >> : Complete the function as expected in the comment above.
+
 	
-	// Make **ONLY** three switches (DIV+, DIV- and HOLD) connected to div_hold_switch_port (PORTD) as input
+	
 	div_hold_switch_ddr_reg &= ~((1 << div_add_sw_pin) | (1 << div_sub_sw_pin) | (1 << hold_sw_pin));
-	
-	// Activate pull-up for **ONLY** for three switches (DIV+, DIV- and HOLD) connected to div_hold_switch_port (PORTD)
 	div_hold_switch_port_reg |= ((1 << div_add_sw_pin) | (1 << div_sub_sw_pin) | (1 << hold_sw_pin));
-
-	// Make **ONLY** two switches (UP and DOWN) connected to up_down_switch_port (PORTE) as input
 	up_down_switch_ddr_reg &= ~((1 << up_sw_pin) | (1 << down_sw_pin));
-
-	// Activate pull-up for **ONLY** for two switches (UP and DOWN) connected to up_down_switch_port (PORTE)
 	up_down_switch_port_reg |= ((1 << up_sw_pin) | (1 << down_sw_pin));
-
-	// Make **ONLY** the dso_input_channel pin connected to dso_input_channel_port (PORTK) as input
 	dso_input_channel_ddr_reg &= ~(1 << dso_input_channel_pin);
-
-	// Deactivate pull-up for **ONLY** dso_input_channel pin connected to dso_input_channel_port (PORTK)
 	dso_input_channel_port_reg &= ~(1 << dso_input_channel_pin);
 }
 
 
-/**
- * @brief      Configures External Interrupt on DIV+, DIV-, HOLD, UP, DOWN switch pins
- */
 void dso_switches_interrupt_config(void)
 {
-	// << NOTE >> : Use Masking and Shift Operators here
-	// << TODO >> : Complete the function as expected in the comment above
+	
 
 	// All interrupts have to be disabled before configuring interrupts
 	cli();	// Disable interrupts globally
@@ -179,26 +121,18 @@ void dso_switches_interrupt_config(void)
 
 	sei();	// Enable interrupts gloabally
 }
-/**
- * @brief      Initializes the Digital Oscilloscope peripherals (switches, display, input channel)
- */
+
 void dso_init(void)
 {
-	// << NOTE >> : You are not allowed to modify or change anything inside this function
+	
 
 	dso_switches_input_channel_config();
 	dso_switches_interrupt_config();
 	adc_init();
-
-	// maps the GLCD connections with Arduino Mega pins to the ATmega2560 pins
-	// the function is defined in "u8glib.c" file
 	glcd_setup();
 }
 
 
-/**
- * @brief      Interrupt Service Routine for div_add_sw_pin_int (INT1)
- */
 ISR(div_add_sw_pin_int_vect)  
 {
 	ms_per_div = ms_per_div + 0.5; // increment ms_per_div by 0.5, each time DIV+ is pressed
@@ -206,9 +140,6 @@ ISR(div_add_sw_pin_int_vect)
 }
 
 
-/**
- * @brief      Interrupt Service Routine for div_sub_sw_pin_int (INT2)
- */
 ISR(div_sub_sw_pin_int_vect)
 {
 	ms_per_div -= 0.5; // Decrement ms_per_div by 0.5, each time DIV- is pressed
@@ -216,9 +147,6 @@ ISR(div_sub_sw_pin_int_vect)
 }
 
 
-/**
- * @brief      Interrupt Service Routine for hold_sw_pin_int (INT3)
- */
 ISR(hold_sw_pin_int_vect)
 {
 	hold_flag = 1; // setting the hold flag when hold switch is pressed
@@ -227,9 +155,6 @@ ISR(hold_sw_pin_int_vect)
 }
 
 
-/**
- * @brief      Interrupt Service Routine for up_sw_pin_int (INT4)
- */
 ISR(up_sw_pin_int_vect)
 {
 	vert_disp--; // decreasing vert_disp by 1 step on every press of UP switch
@@ -237,24 +162,16 @@ ISR(up_sw_pin_int_vect)
 }
 
 
-/**
- * @brief      Interrupt Service Routine for down_sw_pin_int (INT5)
- */
 ISR(down_sw_pin_int_vect)
 {
 	vert_disp++;// increasing vert_disp by 1 step on every press of DOWN switch
 	if(vert_disp > 31) vert_disp =0;  // resetting the vert_disp to 0 when waveform moves out of the display  
 }
 
-
-/**
- * @brief      Display the Start Screen of DSO
- */
 void dso_start_screen(void)
 {
 	setFont(u8g_font_5x7);
 	firstPage();
-	// << NOTE >> : You can add your creativity over here!
 	do
 	{	
 		drawFrame(0,0,128,63);
@@ -267,12 +184,9 @@ void dso_start_screen(void)
 }
 
 
-/**
- * @brief      Sample the waveform from the DSO input channel and store the data in a buffer array.
- */
 void sample_input_wave(void)
 {
-	// << TODO >> : Complete the logic in function as expected in the comment above.
+	
 	for (int i = 0; i < 192; i++)
 	{
 		buffer_input_data[i] = convert_analog_channel_data(dso_input_channel_pin);// storing the data from input waveform into buffer
@@ -280,17 +194,10 @@ void sample_input_wave(void)
 		  else if(ms_per_div == 1.0) _delay_us(110);
 		  else if(ms_per_div == 1.5) _delay_us(160);
 		  else if(ms_per_div == 2) _delay_us(210);      
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//i was using above commented code to determine the sampling frequency, but at 0.5 ms_per_div number peaks is more than the number peaks shown in the sample video even i added 0 delay
-// at 0.5 ms_per_div still the issue remains the same. 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	}
 }
 
-/**
- * @brief      From the buffer data of input waveform, calculate the values in buffer array which is max. (V_max), min. (V_min),
- * 			   half (V_mid) of the amplitude and the peak-to-peak voltage (V_pp) in Volts of the given waveform
- */
 void calc_vpp_vmid(void)
 {
 	V_max = 0, V_min=0;
@@ -304,7 +211,7 @@ void calc_vpp_vmid(void)
 
 
 /**
- * @brief      Calculate the index values from buffer array where the "first" wave in given waveform starts (start_wave_idx) and ends (end_wave_idx) its cycle
+ * 
  *		     _______	    ________
  *          |		|	   |		|
  *  ___start|_______|___end|________|______
@@ -313,7 +220,7 @@ void calc_vpp_vmid(void)
  */
 void calc_start_end_wave_idx(void)
 {
-	// << TODO >> : Complete the logic in function as expected in the comment above.
+	
 	  for(int i=0;i<192;i++)
 	  {
 		  if(buffer_input_data[i]<V_mid&&buffer_input_data[i+1]>=V_mid)
@@ -333,57 +240,37 @@ void calc_start_end_wave_idx(void)
 }
 
 
-/**
- * @brief      Find the frequency of input waveform
- */
 void calc_frequency(void)
 {
-	// << TODO >> : Complete the logic in function as expected in the comment above.
+	
 	float t = end_wave_idx-start_wave_idx;
 	if(t>0) freq=8/(t*(ms_per_div));  // as i'm not using the above mentioned optional feature so i multiplied the Time Period with 0.5 instead of ms_per_div
 	else freq=0;
 }
 
 
-/**
- * @brief      Measure various parameters of input waveform such as V_pp in Volts, V_mid, start_wave_idx, end_wave_idx and freq in kHz
- */
 void measure_parameters(void)
 {
-	// << NOTE >> : You are not allowed to modify or change anything inside this function
+	
 
-	// calculate the V_pp (peak-to-peak) voltage in Volts and the V_mid (value from buffer array which is half the amplitude)
+	
 	calc_vpp_vmid();
-
-	// calculate the index values from buffer array where the "first" wave in given waveform starts (start_wave_idx) and ends (end_wave_idx) its cycle
 	calc_start_end_wave_idx();
-
-	// calculate the frequency of input waveform in kHz unit
 	calc_frequency();
 }
 
 
-/**
- * @brief      Compute and store the pixel locations of the "Display Waveform" to show each data point of input waveform
- * 				or Mapping the data points of input waveform to the pixel locations inside "Display Waveform" area such that
- * 				waveform is symmetric about the center horizontal line
- */
 void translate_wave_to_pixels(void)
 {
-	// << TODO >> : Complete the logic in function as expected in the comment above.
+	
 	  for(int i=0; i<96; i++){
 		  pixel_loc[i] = (32+(V_mid-buffer_input_data[i])/4);// mapping the stored waveform (0, 255) in pixels (0, 63) and making it symmetrical about central horizontal line 
 	  }
 }
 
-
-/**
- * @brief      Draw the reference frame in "Display Waveform" Area for easy view of the input waveform
- * 			   with equal divisions for Time in msec (on X-axis) and Voltage level in Volts (on Y-axis)
- */
 void draw_ref_frame(void)
 {
-	// << NOTE >> : You are not allowed to modify or change anything inside this function
+	
 
 	// drawing outer boundary or rectangle in the "Display Waveform" Area of 96 (columns) x 64 (rows)
 	drawFrame(0, 0, 95, 63);
@@ -408,25 +295,15 @@ void draw_ref_frame(void)
 	}
 }
 
-
-/**
- * @brief      Draw the input waveform data points translated to pixel locations in "Display Waveform" area
- * 			   Make use of "drawLine" function from u8g library to connect the pixel dots or data points so the input waveform is visualized
- */
 void draw_waveform(void)
 {
 	for(int x = 0;x < 96;x++) drawLine(x,(vert_disp+pixel_loc[x]),x,(vert_disp+pixel_loc[x+1]));
 // pixel_loc stores the y coordinates of every point of the waveform, looping from 0 to 96(x coordinate) and joining these points with drawline function   
 }
 
-
-/**
- * @brief      Write text in the "Display Waveform Info" Area for displaying various parameters measured of the input waveform
- * 			   and data of parameters measured from the given waveform
- */
 void display_wave_info_text_data(void)
 {
-	// << NOTE >> : You are not allowed to modify or change anything inside this function
+	
 
 	drawStr(96, 7, "ms/div");
 	setPrintPos(96, 14);
@@ -447,13 +324,9 @@ void display_wave_info_text_data(void)
 }
 
 
-/**
- * @brief      Display the input waveform in "Display Waveform" area; info text and measured parameter values in "Display Waveform Info" area
- */
 void dso_display_waveform_data(void)
 {
-	// << NOTE >> : You are not allowed to modify or change the "do-while" loop
-	// << TODO >> : You can although add a condition to hold the running wave on press of HOLD switch
+	
 	
 	firstPage();
 	do
@@ -471,13 +344,9 @@ void dso_display_waveform_data(void)
 }
 
 
-/**
- * @brief      Start the operation of DSO to sample, measure, translate and display the waveform and parameter values in the respective areas on GLCD
- */
 void start_dso_operation(void)
 {
-	// << NOTE >> : You are not allowed to modify or change anything inside this function
-
+	
 	// sample the input waveform
 	sample_input_wave();
 
@@ -493,12 +362,6 @@ void start_dso_operation(void)
 }
 
 
-//------------------------------------------- MAIN ------------------------------------------------------------
-/**
- * @brief      Main Function
- *
- * @details    Initializes the DSO peripherals. Calls the Start Screen of DSO and initiates the DSO operation.
- */
 int main(void)
 {
 	dso_init();
